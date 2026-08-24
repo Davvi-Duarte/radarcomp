@@ -55,9 +55,15 @@ jobs:
           else
             git config user.name "radarcomp-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
             git add data/ site/data/
             git commit -m "chore(data): RadarComp scan [skip ci]"
-            git push
+
+            echo "Sincronizando com a versão mais recente da main..."
+            git pull --rebase origin main
+
+            echo "Enviando dados atualizados..."
+            git push origin HEAD:main
           fi
 
       - name: Configure GitHub Pages
