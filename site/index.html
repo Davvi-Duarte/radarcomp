@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RadarComp — radar estratégico de oportunidades em Computação">
+  <title>RadarComp</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">RADAR ESTRATÉGICO DE CARREIRA</div>
+      <h1>RadarComp</h1>
+      <p>Plano A: IFPB · Plano B: Docência estratégica · Plano C: QA</p>
+      <div id="last-update" class="last-update">Carregando atualização…</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="summary-grid" aria-label="Resumo">
+      <article class="summary-card"><span>🔥 Plano A</span><strong id="count-a">0</strong></article>
+      <article class="summary-card"><span>🟠 Plano B</span><strong id="count-b">0</strong></article>
+      <article class="summary-card"><span>🟡 Plano C</span><strong id="count-c">0</strong></article>
+      <article class="summary-card"><span>📌 Total</span><strong id="count-total">0</strong></article>
+    </section>
+
+    <section class="toolbar">
+      <div class="filters" id="filters">
+        <button class="filter active" data-filter="all">Todos</button>
+        <button class="filter" data-filter="A">Plano A</button>
+        <button class="filter" data-filter="B">Plano B</button>
+        <button class="filter" data-filter="C">Plano C</button>
+        <button class="filter" data-filter="P0">P0</button>
+        <button class="filter" data-filter="OPEN">Abertas</button>
+      </div>
+      <input id="search" type="search" placeholder="Buscar cargo, área, campus…" aria-label="Buscar oportunidades">
+    </section>
+
+    <section id="opportunities" class="cards" aria-live="polite"></section>
+    <div id="empty" class="empty hidden">Nenhuma oportunidade corresponde aos filtros atuais.</div>
+  </main>
+
+  <footer>
+    <div class="container">RadarComp · links oficiais sempre têm prioridade sobre resumos automáticos.</div>
+  </footer>
+  <script src="js/app.js"></script>
+</body>
+</html>

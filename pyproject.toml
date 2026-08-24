@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "radarcomp"
+version = "0.1.0"
+description = "Radar estratégico de oportunidades em Computação"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "beautifulsoup4>=4.12,<5",
+  "pydantic>=2.9,<3",
+  "pypdf>=5,<7",
+  "python-dotenv>=1,<2",
+  "PyYAML>=6,<7",
+  "requests>=2.32,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<10",
+  "pytest-cov>=5,<8",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

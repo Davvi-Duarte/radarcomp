@@ -1,0 +1,22 @@
+weights:
+  ifpb_professor: 100
+  professor_effective: 30
+  professor_substitute: 25
+  computing_area: 40
+  private_teaching: 60
+  documented_teaching: 20
+  target_region: 20
+  ifpb_it: 20
+  qa: 20
+  degree_match: 20
+  degree_partial: 10
+  skill_match_each: 3
+  skill_match_cap: 15
+
+urgency:
+  days_2: 10
+  days_7: 7
+  days_14: 4
+
+urgency_bonus_cap: 10
+dedup_threshold: 0.88

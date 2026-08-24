@@ -1,0 +1,22 @@
+ifpb:
+  name: IFPB
+  institution: IFPB
+  verified_at: "2026-08-24"
+  sections:
+    - name: IFPB Professor Substituto
+      kind: ifpb_professor_substituto
+      enabled: true
+      verified: true
+      url: https://www.ifpb.edu.br/concursopublico/professor-substituto/vigentes
+
+    - name: IFPB Professor Efetivo
+      kind: ifpb_professor_efetivo
+      enabled: true
+      verified: true
+      url: https://www.ifpb.edu.br/concursopublico/professor/vigentes
+
+    - name: IFPB Técnico-Administrativo
+      kind: ifpb_tae
+      enabled: true
+      verified: true
+      url: https://www.ifpb.edu.br/concursopublico/tecnico-administrativo/vigentes

@@ -1,0 +1,31 @@
+target_regions:
+  - Campina Grande
+  - Alagoa Grande
+  - Guarabira
+  - Esperança
+  - Areia
+  - Brejo Paraibano
+
+target_states:
+  - PB
+
+plans:
+  primary: IFPB_PROFESSOR
+  secondary: PRIVATE_TEACHING
+  tertiary: QA
+
+degrees: []
+
+current_degree:
+  masters_in_progress: true
+
+skills: []
+qa_skills: []
+
+teaching_interests:
+  - Redes de Computadores
+  - Programação
+  - Banco de Dados
+  - Engenharia de Software
+  - Sistemas Operacionais
+  - Segurança da Informação
