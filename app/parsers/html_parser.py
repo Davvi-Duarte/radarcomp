@@ -28,60 +28,220 @@ def parse_pt_datetime(value: str) -> datetime | None:
 
 
 def _content_root(soup: BeautifulSoup):
-    return soup.find("main") or soup.select_one("#content-core") or soup.select_one("#content") or soup
+    return (
+        soup.select_one("#content-core")
+        or soup.select_one("#content")
+        or soup.find("main")
+        or soup
+    )
 
 
-def parse_plone_listing(html: str, base_url: str, source_name: str, source_kind: str) -> list[ListingEntry]:
+def parse_plone_listing(
+    html: str,
+    base_url: str,
+    source_name: str,
+    source_kind: str,
+) -> list[ListingEntry]:
     soup = BeautifulSoup(html, "html.parser")
     root = _content_root(soup)
+
     entries: list[ListingEntry] = []
     seen: set[str] = set()
 
-    for heading in root.find_all(["h2", "h3"]):
-        anchor = heading.find("a", href=True)
-        if anchor is None and heading.parent is not None:
-            anchor = heading.parent.find("a", href=True)
-        if anchor is None:
-            continue
-        title = normalize_html_text(heading.get_text(" ", strip=True))
-        if not title.lower().startswith("edital"):
-            continue
-        url = urljoin(base_url, anchor["href"])
-        if url in seen:
-            continue
-        seen.add(url)
-        description = ""
-        sibling = heading.find_next_sibling()
-        if sibling is not None and sibling.name in {"p", "div"}:
-            description = normalize_html_text(sibling.get_text(" ", strip=True))
-        elif anchor.parent is not None:
-            text = normalize_html_text(anchor.parent.get_text(" ", strip=True))
-            if text.startswith(title):
-                description = text[len(title):].strip(" -–—")
-        entries.append(ListingEntry(title=title, description=description, url=url, source_name=source_name, source_kind=source_kind))
+    def find_card(anchor):
+        """
+        Procura o menor container razoável que represente
+        um item da listagem.
+        """
+        node = anchor
 
-    if entries:
-        return entries
+        for _ in range(6):
+            parent = getattr(node, "parent", None)
 
-    # Fallback for Plone result cards where the link wraps the heading.
+            if parent is None:
+                break
+
+            classes = " ".join(parent.get("class", []))
+
+            if (
+                parent.name in {"article", "li"}
+                or any(
+                    word in classes.lower()
+                    for word in (
+                        "listing",
+                        "card",
+                        "tile",
+                        "item",
+                        "result",
+                        "summary",
+                    )
+                )
+            ):
+                return parent
+
+            if parent == root:
+                break
+
+            node = parent
+
+        return anchor.parent
+
+    def find_title(anchor) -> str:
+        # Caso 1:
+        # <a><h2>Edital...</h2></a>
+        heading = anchor.find(["h2", "h3", "h4"])
+
+        if heading:
+            title = normalize_html_text(
+                heading.get_text(" ", strip=True)
+            )
+
+            if title.lower().startswith("edital"):
+                return title
+
+        # Caso 2:
+        # <h2><a>Edital...</a></h2>
+        text = normalize_html_text(
+            anchor.get_text(" ", strip=True)
+        )
+
+        if text.lower().startswith("edital"):
+            return text
+
+        # Caso 3:
+        # <h2>Edital...</h2>
+        # <a href="..."></a>
+        #
+        # ou outras variações do Plone.
+        node = anchor
+
+        for _ in range(6):
+            parent = getattr(node, "parent", None)
+
+            if parent is None:
+                break
+
+            heading = parent.find(["h2", "h3", "h4"])
+
+            if heading:
+                title = normalize_html_text(
+                    heading.get_text(" ", strip=True)
+                )
+
+                if title.lower().startswith("edital"):
+                    return title
+
+            if parent == root:
+                break
+
+            node = parent
+
+        # Alguns layouts podem usar title/aria-label.
+        for attribute in ("title", "aria-label"):
+            value = anchor.get(attribute)
+
+            if value:
+                title = normalize_html_text(value)
+
+                if title.lower().startswith("edital"):
+                    return title
+
+        return ""
+
+    def find_description(anchor, title: str) -> str:
+        card = find_card(anchor)
+
+        if card:
+            paragraph = card.find("p")
+
+            if paragraph:
+                description = normalize_html_text(
+                    paragraph.get_text(" ", strip=True)
+                )
+
+                if description and description != title:
+                    return description
+
+        # Fallback para título seguido por descrição.
+        node = anchor
+
+        for _ in range(5):
+            parent = getattr(node, "parent", None)
+
+            if parent is None:
+                break
+
+            heading = parent.find(["h2", "h3", "h4"])
+
+            if heading:
+                sibling = heading.find_next_sibling()
+
+                if sibling is not None and sibling.name in {
+                    "p",
+                    "div",
+                }:
+                    description = normalize_html_text(
+                        sibling.get_text(" ", strip=True)
+                    )
+
+                    if description:
+                        return description
+
+            if parent == root:
+                break
+
+            node = parent
+
+        return ""
+
+    # Em vez de presumir a estrutura exata do Plone,
+    # analisamos todos os links do conteúdo.
     for anchor in root.find_all("a", href=True):
-        heading = anchor.find(["h2", "h3"])
-        if not heading:
+        title = find_title(anchor)
+
+        if not title:
             continue
-        title = normalize_html_text(heading.get_text(" ", strip=True))
-        if not title.lower().startswith("edital"):
+
+        href = str(anchor.get("href", "")).strip()
+
+        if not href:
             continue
-        url = urljoin(base_url, anchor["href"])
+
+        url = urljoin(base_url, href)
+
+        # Arquivos não são páginas de oportunidade.
+        clean_url = url.lower().split("?", 1)[0]
+
+        if clean_url.endswith(
+            (
+                ".pdf",
+                ".doc",
+                ".docx",
+                ".xls",
+                ".xlsx",
+                ".zip",
+            )
+        ):
+            continue
+
         if url in seen:
             continue
-        seen.add(url)
-        description = ""
-        p = anchor.find("p")
-        if p:
-            description = normalize_html_text(p.get_text(" ", strip=True))
-        entries.append(ListingEntry(title=title, description=description, url=url, source_name=source_name, source_kind=source_kind))
-    return entries
 
+        seen.add(url)
+
+        description = find_description(anchor, title)
+
+        entries.append(
+            ListingEntry(
+                title=title,
+                description=description,
+                url=url,
+                source_name=source_name,
+                source_kind=source_kind,
+            )
+        )
+
+    return entries
 
 def parse_plone_detail(html: str, base_url: str) -> tuple[str, str, list[DocumentLink]]:
     soup = BeautifulSoup(html, "html.parser")
