@@ -90,7 +90,7 @@
     "city": null,
     "compatibility_score": 0.0,
     "contract_type": null,
-    "description": "Processo Seletivo Simplificado para contratação de professor substituto de Informática conforme Edital nº 164/2026 do IFPB.",
+    "description": "Processo Seletivo Simplificado para contratação de professor substituto de Informática conforme Edital nº 164/2026.",
     "edital_number": null,
     "edital_url": null,
     "first_seen_at": "2026-11-19T03:25:43.019095Z",
@@ -99,7 +99,7 @@
     "institution_type": "public",
     "job_area": "Informática",
     "last_notified_hash": "782101c00f333f3b747d23df3c1e9307baa0bb9762722fe0b8e484fcb607d74e",
-    "last_seen_at": "2026-11-21T17:30:10.299042Z",
+    "last_seen_at": "2026-11-21T23:14:30.069021Z",
     "metadata": {
       "documents": [],
       "llm_confidence": 0.9,
