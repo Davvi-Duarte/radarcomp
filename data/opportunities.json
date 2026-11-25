@@ -13,8 +13,8 @@
     "institution": "IFPB",
     "institution_type": "public",
     "job_area": "Informática",
-    "last_notified_hash": "2c0cc9393694bb28e13cbc275c40712ac2349e238f6907eda206c0d04058aeb9",
-    "last_seen_at": "2026-11-19T03:25:43.019095Z",
+    "last_notified_hash": "85fc0c1a4bed4d7f416b965f9f2de6e8c9a2969541aa2db4b61ae9ed4c2affdc",
+    "last_seen_at": "2026-11-25T22:31:05.651766Z",
     "metadata": {
       "documents": [
         {
@@ -51,6 +51,20 @@
           "published_at": "2026-11-18T23:25:00",
           "title": "ANEXO IV",
           "url": "https://www.ifpb.edu.br/concursopublico/professor-substituto/vigentes/edital-no-164-2026-professor-substituto-do-ifpb/anexo-iv.pdf"
+        },
+        {
+          "description": "",
+          "is_pdf": false,
+          "published_at": "2026-11-25T21:18:00",
+          "title": "Sistema de Inscrições",
+          "url": "https://www.ifpb.edu.br/concursopublico/professor-substituto/vigentes/edital-no-164-2026-professor-substituto-do-ifpb/sistema-de-inscricoes"
+        },
+        {
+          "description": "Divulgação da relação de candidatos com pedidos de isenção de pagamento de inscrição deferidos e indeferidos (arquivo único em pdf) – emitidos pelo MDS/SISTAC em 25/11/2026 - Edital 164/2026 – professor substituto.",
+          "is_pdf": true,
+          "published_at": "2026-11-25T21:19:00",
+          "title": "Pedidos de Isenção Deferidos e Indeferidos - Edital 164/2026",
+          "url": "https://www.ifpb.edu.br/concursopublico/professor-substituto/vigentes/edital-no-164-2026-professor-substituto-do-ifpb/pedidos_isencao_deferidos_indeferidos_164_2026.pdf"
         }
       ],
       "llm_confidence": 0.9,
@@ -72,7 +86,7 @@
       "Professor substituto (+25)",
       "Área de Computação (+40)"
     ],
-    "source_hash": "2c0cc9393694bb28e13cbc275c40712ac2349e238f6907eda206c0d04058aeb9",
+    "source_hash": "85fc0c1a4bed4d7f416b965f9f2de6e8c9a2969541aa2db4b61ae9ed4c2affdc",
     "source_url": "https://www.ifpb.edu.br/concursopublico/professor-substituto/vigentes/edital-no-164-2026-professor-substituto-do-ifpb",
     "state": "PB",
     "status": "WATCHING",
@@ -90,16 +104,16 @@
     "city": null,
     "compatibility_score": 0.0,
     "contract_type": null,
-    "description": "Processo Seletivo Simplificado para contratação de professor substituto de Informática conforme Edital nº 164/2026 do IFPB.",
+    "description": "Destaques Acesso a Sistemas Auditoria Interna Concursos Editora Educação a Distância (EaD) Egressos Acesso à Informação Núcleo de Integridade e Governança Órgão Colegiados Ouvidoria RSC-TAE Portais Portal do Estudante Portal Integra Portal de Periódicos Portal do Servidor Portal da TI Portal da Transparência Navegação Acessibilidade",
     "edital_number": null,
     "edital_url": null,
     "first_seen_at": "2026-11-19T03:25:43.019095Z",
     "id": "cd0dd2f5aa7710c30525",
     "institution": "IFPB",
     "institution_type": "public",
-    "job_area": "Informática",
+    "job_area": "informatica",
     "last_notified_hash": "782101c00f333f3b747d23df3c1e9307baa0bb9762722fe0b8e484fcb607d74e",
-    "last_seen_at": "2026-11-25T12:52:31.893883Z",
+    "last_seen_at": "2026-11-25T22:31:05.651766Z",
     "metadata": {
       "documents": [],
       "llm_confidence": 0.9,
