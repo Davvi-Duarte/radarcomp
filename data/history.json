@@ -352,5 +352,16 @@
     "opportunity_id": "cd0dd2f5aa7710c30525",
     "source": "IFPB Professor Substituto",
     "timestamp": "2026-11-27T08:29:12.579927Z"
+  },
+  {
+    "details": {
+      "priority": "P0",
+      "score": 165.0,
+      "url": "https://www.ifpb.edu.br/search?Subject=Editais Concurso Público"
+    },
+    "event": "UPDATED",
+    "opportunity_id": "cd0dd2f5aa7710c30525",
+    "source": "IFPB Professor Substituto",
+    "timestamp": "2026-11-27T18:57:46.953521Z"
   }
 ]
